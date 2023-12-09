@@ -1,0 +1,24 @@
+package com.tune.novel.core.common.exception;
+
+import com.tune.novel.core.common.constant.ErrorCodeEnum;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
+/**
+ * @author Tune
+ * @create 2023-12-07-22:09
+ * @description:
+ * 自定义业务异常，用于处理用户请求时，业务错误时抛出
+ */
+@EqualsAndHashCode(callSuper = true)
+@Data
+public class BusinessException extends RuntimeException{
+    private final ErrorCodeEnum errorCodeEnum;
+
+    public BusinessException(ErrorCodeEnum errorCodeEnum) {
+        // 不调用父类 Throwable的fillInStackTrace() 方法生成栈追踪信息，提高应用性能
+        // 构造器之间的调用必须在第一行
+        super(errorCodeEnum.getMessage(), null, false, false);
+        this.errorCodeEnum = errorCodeEnum;
+    }
+}
