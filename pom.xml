@@ -16,6 +16,7 @@
     <properties>
         <java.version>1.8</java.version>
         <mybatis-plus.version>3.5.3</mybatis-plus.version>
+        <springdoc-openapi.version>2.0.0</springdoc-openapi.version>
     </properties>
     <dependencies>
         <!--项目初始化-->
@@ -90,25 +91,40 @@
             <artifactId>jedis</artifactId>
             <version>3.9.0</version>
         </dependency>
+        <!-- OpenAPI 3 -->
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+            <version>${springdoc-openapi.version}</version>
+        </dependency>
     </dependencies>
 
     <build>
         <plugins>
             <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version> <!-- 版本号可能不同，以你实际使用的为准 -->
                 <configuration>
-                    <image>
-                        <builder>paketobuildpacks/builder-jammy-base:latest</builder>
-                    </image>
+                    <source>1.8</source>
+                    <target>1.8</target>
                     <excludes>
-                        <exclude>
-                            <groupId>org.projectlombok</groupId>
-                            <artifactId>lombok</artifactId>
-                        </exclude>
+                    <exclude>
+                        <groupId>org.projectlombok</groupId>
+                        <artifactId>lombok</artifactId>
+                    </exclude>
                     </excludes>
                 </configuration>
             </plugin>
+            <!--<plugin>-->
+            <!--    <groupId>org.springframework.boot</groupId>-->
+            <!--    <artifactId>spring-boot-maven-plugin</artifactId>-->
+            <!--    <configuration>-->
+            <!--        <image>-->
+            <!--            <builder>paketobuildpacks/builder-jammy-base:latest</builder>-->
+            <!--        </image>-->
+            <!--    </configuration>-->
+            <!--</plugin>-->
         </plugins>
     </build>
 
