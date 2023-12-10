@@ -9,6 +9,7 @@ import java.util.List;
  * @author Tune
  * @create 2023-12-09-15:47
  * @description:
+ * 首页模块 服务类
  */
 public interface HomeService {
     /**

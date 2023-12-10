@@ -12,6 +12,7 @@ import org.springframework.context.annotation.Bean;
 
 import java.util.Map;
 
+
 @SpringBootApplication
 @MapperScan("com.tune.novel.mapper")
 @EnableCaching
@@ -20,6 +21,7 @@ public class NovelApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(NovelApplication.class, args);
+        log.info("启动成功");
     }
 
     @Bean
