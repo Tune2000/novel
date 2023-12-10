@@ -1,5 +1,6 @@
 package com.tune.novel.model.entity;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 import lombok.AllArgsConstructor;
@@ -39,9 +40,9 @@ public class UserInfo  {
     //用户状态;0-正常
     private Integer status;
     //创建时间
-    private Date createTime;
+    private LocalDateTime createTime;
     //更新时间
-    private Date updateTime;
+    private LocalDateTime updateTime;
 
 
 

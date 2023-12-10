@@ -3,12 +3,16 @@ server:
   port: 8080
 # 项目配置
 novel:
+  # JWT 密钥
+  jwt:
+    secret: E66559580A1ADF48CDD928516062F12E
   # 跨域配置
   cors:
     # 允许跨域的域名
     allow-origins:
       - http://localhost:1024
       - http://localhost:8080
+
 spring:
     # 数据源配置
   datasource:
