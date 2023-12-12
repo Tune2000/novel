@@ -3,7 +3,9 @@ package com.tune.novel.controller.front;
 import com.tune.novel.core.common.constant.ApiRouterConsts;
 import com.tune.novel.core.common.resp.RestResp;
 import com.tune.novel.core.constant.SystemConfigConsts;
+import com.tune.novel.model.dto.req.UserLoginReqDto;
 import com.tune.novel.model.dto.req.UserRegisterReqDto;
+import com.tune.novel.model.dto.resp.UserLoginRespDto;
 import com.tune.novel.model.dto.resp.UserRegisterRespDto;
 import com.tune.novel.servie.UserService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -39,5 +41,14 @@ public class UserController {
     @PostMapping("register")
     public RestResp<UserRegisterRespDto> register(@Valid @RequestBody UserRegisterReqDto dto) {
         return userService.register(dto);
+    }
+
+    /**
+     * 用户登录接口
+     */
+    @Operation(summary = "用户登录接口")
+    @PostMapping("login")
+    public RestResp<UserLoginRespDto> login(@Valid @RequestBody UserLoginReqDto dto) {
+        return userService.login(dto);
     }
 }

@@ -61,6 +61,7 @@ public class HomeBookCacheManager {
                     BookInfo bookInfo = bookInfoMap.get(v.getBookId());
                     HomeBookRespDto bookRespDto = new HomeBookRespDto();
                     bookRespDto.setBookId(v.getBookId());
+                    bookRespDto.setType(v.getType());
                     bookRespDto.setBookName(bookInfo.getBookName());
                     bookRespDto.setPicUrl(bookInfo.getPicUrl());
                     bookRespDto.setAuthorName(bookInfo.getAuthorName());
