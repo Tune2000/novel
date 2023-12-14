@@ -1,5 +1,6 @@
 package com.tune.novel.model.entity;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 import lombok.AllArgsConstructor;
@@ -28,13 +29,13 @@ public class BookComment  {
     //评价内容
     private String commentContent;
     //回复数量
-    private Object replyCount;
+    private Integer replyCount;
     //审核状态;0-待审核 1-审核通过 2-审核不通过
     private Integer auditStatus;
     //创建时间
-    private Date createTime;
+    private LocalDateTime createTime;
     //更新时间
-    private Date updateTime;
+    private LocalDateTime updateTime;
 
 
 

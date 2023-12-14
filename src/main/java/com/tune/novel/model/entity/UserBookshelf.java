@@ -1,7 +1,11 @@
 package com.tune.novel.model.entity;
 
+import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Date;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,8 +21,11 @@ import com.baomidou.mybatisplus.annotation.TableName;
 @AllArgsConstructor
 @NoArgsConstructor
 @TableName("user_bookshelf")
-public class UserBookshelf  {
-    //主键@TableId
+public class UserBookshelf implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+    //主键
+    @TableId(value = "id", type = IdType.AUTO)
     private Long id;
 
     //用户ID
@@ -28,9 +35,9 @@ public class UserBookshelf  {
     //上一次阅读的章节内容表ID
     private Long preContentId;
     //创建时间;
-    private Date createTime;
+    private LocalDateTime createTime;
     //更新时间;
-    private Date updateTime;
+    private LocalDateTime updateTime;
 
 
 

@@ -1,4 +1,4 @@
-package com.tune.novel.manager;
+package com.tune.novel.manager.cache;
 
 import com.tune.novel.core.common.util.ImgVerifyCodeUtils;
 import com.tune.novel.core.constant.CacheConsts;

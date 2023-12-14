@@ -1,4 +1,4 @@
-package com.tune.novel.manager;
+package com.tune.novel.manager.cache;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;

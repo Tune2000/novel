@@ -1,7 +1,11 @@
 package com.tune.novel.model.entity;
 
+import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Date;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,8 +21,12 @@ import com.baomidou.mybatisplus.annotation.TableName;
 @AllArgsConstructor
 @NoArgsConstructor
 @TableName("pay_wechat")
-public class PayWechat  {
-    //主键@TableId
+public class PayWechat implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
+    //主键
+    @TableId(value = "id", type = IdType.AUTO)
     private Long id;
 
     //商户订单号
@@ -32,17 +40,17 @@ public class PayWechat  {
     //交易状态描述
     private String tradeStateDesc;
     //订单总金额;单位：分
-    private Object amount;
+    private Integer amount;
     //用户支付金额;单位：分
-    private Object payerTotal;
+    private Integer payerTotal;
     //支付完成时间
-    private Date successTime;
+    private LocalDateTime successTime;
     //支付者用户标识;用户在直连商户appid下的唯一标识
     private String payerOpenid;
     //创建时间
-    private Date createTime;
+    private LocalDateTime createTime;
     //更新时间
-    private Date updateTime;
+    private LocalDateTime updateTime;
 
 
 

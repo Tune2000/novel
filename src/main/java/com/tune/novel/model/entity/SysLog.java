@@ -1,7 +1,10 @@
 package com.tune.novel.model.entity;
 
+import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Date;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,8 +21,11 @@ import com.baomidou.mybatisplus.annotation.TableName;
 @AllArgsConstructor
 @NoArgsConstructor
 @TableName("sys_log")
-public class SysLog  {
-    @TableId
+public class SysLog implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
+    @TableId(value = "id", type = IdType.AUTO)
     private Long id;
 
     //用户id
@@ -29,7 +35,7 @@ public class SysLog  {
     //用户操作
     private String operation;
     //响应时间
-    private Object time;
+    private Integer time;
     //请求方法
     private String method;
     //请求参数
@@ -37,7 +43,7 @@ public class SysLog  {
     //IP地址
     private String ip;
     //创建时间
-    private Date createTime;
+    private LocalDateTime createTime;
 
 
 

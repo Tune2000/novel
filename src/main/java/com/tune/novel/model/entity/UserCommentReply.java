@@ -1,5 +1,6 @@
 package com.tune.novel.model.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import lombok.AllArgsConstructor;
@@ -17,7 +18,10 @@ import com.baomidou.mybatisplus.annotation.TableName;
 @AllArgsConstructor
 @NoArgsConstructor
 @TableName("user_comment_reply")
-public class UserCommentReply  {
+public class UserCommentReply implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
     //主键@TableId
     private Long id;
 

@@ -1,7 +1,7 @@
 package com.tune.novel.servie.impl;
 
 import com.tune.novel.core.common.resp.RestResp;
-import com.tune.novel.manager.HomeBookCacheManager;
+import com.tune.novel.manager.cache.HomeBookCacheManager;
 import com.tune.novel.model.dto.resp.HomeBookRespDto;
 import com.tune.novel.servie.HomeService;
 import lombok.RequiredArgsConstructor;

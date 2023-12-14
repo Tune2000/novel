@@ -2,7 +2,7 @@ package com.tune.novel.servie.impl;
 
 import com.baomidou.mybatisplus.core.toolkit.IdWorker;
 import com.tune.novel.core.common.resp.RestResp;
-import com.tune.novel.manager.VerifyCodeManager;
+import com.tune.novel.manager.cache.VerifyCodeManager;
 import com.tune.novel.model.dto.resp.ImgVerifyCodeRespDto;
 import com.tune.novel.servie.ResourceService;
 import lombok.RequiredArgsConstructor;

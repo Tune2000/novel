@@ -1,5 +1,7 @@
 package com.tune.novel.model.entity;
 
+import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 import lombok.AllArgsConstructor;
@@ -17,7 +19,9 @@ import com.baomidou.mybatisplus.annotation.TableName;
 @AllArgsConstructor
 @NoArgsConstructor
 @TableName("book_info")
-public class BookInfo  {
+public class BookInfo implements Serializable {
+
+    private static final long serialVersionUID = 1L;
     //主键@TableId
     private Long id;
 
@@ -44,21 +48,21 @@ public class BookInfo  {
     //点击量
     private Long visitCount;
     //总字数
-    private Object wordCount;
+    private Integer wordCount;
     //评论数
-    private Object commentCount;
+    private Integer commentCount;
     //最新章节ID
     private Long lastChapterId;
     //最新章节名
     private String lastChapterName;
     //最新章节更新时间
-    private Date lastChapterUpdateTime;
+    private LocalDateTime lastChapterUpdateTime;
     //是否收费;1-收费 0-免费
     private Integer isVip;
     //创建时间
-    private Date createTime;
+    private LocalDateTime createTime;
     //更新时间
-    private Date updateTime;
+    private LocalDateTime updateTime;
 
 
 

@@ -1,7 +1,10 @@
 package com.tune.novel.model.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,8 +20,12 @@ import com.baomidou.mybatisplus.annotation.TableName;
 @AllArgsConstructor
 @NoArgsConstructor
 @TableName("user_read_history")
-public class UserReadHistory  {
-    //主键@TableId
+public class UserReadHistory implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
+    //主键
+    @TableId(value = "id", type = IdType.AUTO)
     private Long id;
 
     //用户ID

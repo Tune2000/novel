@@ -7,7 +7,7 @@ import com.tune.novel.core.common.resp.RestResp;
 import com.tune.novel.core.constant.DatabaseConsts;
 import com.tune.novel.core.constant.SystemConfigConsts;
 import com.tune.novel.core.utils.JwtUtils;
-import com.tune.novel.manager.VerifyCodeManager;
+import com.tune.novel.manager.cache.VerifyCodeManager;
 import com.tune.novel.mapper.UserInfoMapper;
 import com.tune.novel.model.dto.req.UserLoginReqDto;
 import com.tune.novel.model.dto.req.UserRegisterReqDto;

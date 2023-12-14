@@ -1,5 +1,7 @@
 package com.tune.novel.model.entity;
 
+import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 import lombok.AllArgsConstructor;
@@ -18,7 +20,10 @@ import com.baomidou.mybatisplus.annotation.TableName;
 @AllArgsConstructor
 @NoArgsConstructor
 @TableName("news_category")
-public class NewsCategory  {
+public class NewsCategory implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
     @TableId
     private Long id;
 
@@ -27,9 +32,9 @@ public class NewsCategory  {
     //排序
     private Integer sort;
     //创建时间
-    private Date createTime;
+    private LocalDateTime createTime;
     //更新时间
-    private Date updateTime;
+    private LocalDateTime updateTime;
 
 
 
