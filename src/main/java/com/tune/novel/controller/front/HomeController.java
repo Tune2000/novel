@@ -2,6 +2,7 @@ package com.tune.novel.controller.front;
 import com.tune.novel.core.common.resp.RestResp;
 import com.tune.novel.core.common.constant.ApiRouterConsts;
 import com.tune.novel.model.dto.resp.HomeBookRespDto;
+import com.tune.novel.model.dto.resp.HomeFriendLinkRespDto;
 import com.tune.novel.servie.HomeService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -32,5 +33,14 @@ public class HomeController {
     @GetMapping("books")
     public RestResp<List<HomeBookRespDto>> listHomeBooks(){
         return homeService.listHomeBooks();
+    }
+
+    /**
+     * 首页友情链接列表查询接口
+     */
+    @Operation(summary = "首页友情链接列表查询接口")
+    @GetMapping("friend_Link/list")
+    public RestResp<List<HomeFriendLinkRespDto>> listHomeFriendLinks() {
+        return homeService.listHomeFriendLinks();
     }
 }

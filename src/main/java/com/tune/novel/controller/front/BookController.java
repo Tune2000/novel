@@ -5,6 +5,7 @@ import com.tune.novel.core.common.resp.RestResp;
 import com.tune.novel.model.dto.resp.BookChapterAboutRespDto;
 import com.tune.novel.model.dto.resp.BookCommentRespDto;
 import com.tune.novel.model.dto.resp.BookInfoRespDto;
+import com.tune.novel.model.dto.resp.BookRankRespDto;
 import com.tune.novel.servie.BookService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -68,5 +69,32 @@ public class BookController {
     public RestResp<BookCommentRespDto> listNewestComments(
             @Parameter(description = "小说ID") Long bookId) {
         return bookService.listNewestComments(bookId);
+    }
+
+    /**
+     * 小说点击榜查询接口
+     */
+    @Operation(summary = "小说点击榜查询接口")
+    @GetMapping("visit_rank")
+    public RestResp<List<BookRankRespDto>> listVisitRankBooks() {
+        return bookService.listVisitRankBooks();
+    }
+
+    /**
+     * 小说新书榜查询接口
+     */
+    @Operation(summary = "小说新书榜查询接口")
+    @GetMapping("newest_rank")
+    public RestResp<List<BookRankRespDto>> listNewestRankBooks() {
+        return bookService.listNewestRankBooks();
+    }
+
+    /**
+     * 小说更新榜查询接口
+     */
+    @Operation(summary = "小说更新榜查询接口")
+    @GetMapping("update_rank")
+    public RestResp<List<BookRankRespDto>> listUpdateRankBooks() {
+        return bookService.listUpdateRankBooks();
     }
 }

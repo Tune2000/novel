@@ -1,5 +1,7 @@
 package com.tune.novel.core.common.constant;
 
+import com.tune.novel.core.constant.SystemConfigConsts;
+
 /**
  * @author Tune
  * @create 2023-12-07-22:37
@@ -7,6 +9,10 @@ package com.tune.novel.core.common.constant;
  * API 路由常量
  */
 public class ApiRouterConsts {
+
+    private ApiRouterConsts() {
+        throw new IllegalStateException(SystemConfigConsts.CONST_INSTANCE_EXCEPTION_MSG);
+    }
     /**
      * API请求路径前缀
      */
@@ -33,6 +39,11 @@ public class ApiRouterConsts {
     public static final String HOME_URL_PREFIX = "/home";
 
     /**
+     * 首页模块新闻请求路径前缀
+     * */
+    public static final String NEWS_URL_PREFIX = "/news";
+
+    /**
      * 小说模块请求路径前缀
      * */
     public static final String BOOK_URL_PREFIX = "/book";
@@ -48,9 +59,19 @@ public class ApiRouterConsts {
     public static final String RESOURCE_URL_PREFIX = "/resource";
 
     /**
+     * 搜索模块请求路径前缀
+     */
+    public static final String SEARCH_URL_PREFIX = "/search";
+
+    /**
      * 前台门户首页API请求路径前缀
      */
     public static final String API_FRONT_HOME_URL_PREFIX = API_FRONT_URL_PREFIX + HOME_URL_PREFIX;
+
+    /**
+     * 前台门户新闻相关API请求路径前缀
+     */
+    public static final String API_FRONT_NEWS_URL_PREFIX = API_FRONT_URL_PREFIX + NEWS_URL_PREFIX;
 
     /**
      * 前台门户小说相关API请求路径前缀
@@ -68,6 +89,9 @@ public class ApiRouterConsts {
     public static final String API_FRONT_RESOURCE_URL_PREFIX =
             API_FRONT_URL_PREFIX + RESOURCE_URL_PREFIX;
 
-    // TODO 路由常量添加
-    // ...省略若干常量
+    /**
+     * 前台门户搜索相关API请求路径前缀
+     */
+    public static final String API_FRONT_SEARCH_URL_PREFIX =
+            API_FRONT_URL_PREFIX + SEARCH_URL_PREFIX;
 }

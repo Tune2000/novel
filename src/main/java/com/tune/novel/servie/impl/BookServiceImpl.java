@@ -6,13 +6,11 @@ import com.tune.novel.core.constant.DatabaseConsts;
 import com.tune.novel.manager.cache.BookChapterCacheManager;
 import com.tune.novel.manager.cache.BookContentCacheManager;
 import com.tune.novel.manager.cache.BookInfoCacheManager;
+import com.tune.novel.manager.cache.BookRankCacheManager;
 import com.tune.novel.manager.dao.UserDaoManager;
 import com.tune.novel.mapper.BookChapterMapper;
 import com.tune.novel.mapper.BookCommentMapper;
-import com.tune.novel.model.dto.resp.BookChapterAboutRespDto;
-import com.tune.novel.model.dto.resp.BookChapterRespDto;
-import com.tune.novel.model.dto.resp.BookCommentRespDto;
-import com.tune.novel.model.dto.resp.BookInfoRespDto;
+import com.tune.novel.model.dto.resp.*;
 import com.tune.novel.model.entity.BookChapter;
 import com.tune.novel.model.entity.BookComment;
 import com.tune.novel.model.entity.UserInfo;
@@ -42,6 +40,8 @@ public class BookServiceImpl implements BookService {
     private final BookChapterCacheManager bookChapterCacheManager;
 
     private final BookContentCacheManager bookContentCacheManager;
+
+    private final BookRankCacheManager bookRankCacheManager;
 
     private final BookChapterMapper bookChapterMapper;
 
@@ -137,5 +137,20 @@ public class BookServiceImpl implements BookService {
             bookCommentRespDto.setComments(Collections.emptyList());
         }
         return RestResp.ok(bookCommentRespDto);
+    }
+
+    @Override
+    public RestResp<List<BookRankRespDto>> listVisitRankBooks() {
+        return RestResp.ok(bookRankCacheManager.listVisitRankBooks());
+    }
+
+    @Override
+    public RestResp<List<BookRankRespDto>> listNewestRankBooks() {
+        return RestResp.ok(bookRankCacheManager.listNewestRankBooks());
+    }
+
+    @Override
+    public RestResp<List<BookRankRespDto>> listUpdateRankBooks() {
+        return RestResp.ok(bookRankCacheManager.listUpdateRankBooks());
     }
 }
