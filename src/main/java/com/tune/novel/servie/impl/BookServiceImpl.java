@@ -1,6 +1,7 @@
 package com.tune.novel.servie.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.tune.novel.core.auth.UserHolder;
 import com.tune.novel.core.common.constant.ErrorCodeEnum;
 import com.tune.novel.core.common.resp.RestResp;
 import com.tune.novel.core.constant.DatabaseConsts;
@@ -11,6 +12,7 @@ import com.tune.novel.manager.cache.BookRankCacheManager;
 import com.tune.novel.manager.dao.UserDaoManager;
 import com.tune.novel.mapper.BookChapterMapper;
 import com.tune.novel.mapper.BookCommentMapper;
+import com.tune.novel.mapper.BookInfoMapper;
 import com.tune.novel.model.dto.resp.*;
 import com.tune.novel.model.entity.BookChapter;
 import com.tune.novel.model.entity.BookComment;
@@ -45,6 +47,8 @@ public class BookServiceImpl implements BookService {
     private final BookContentCacheManager bookContentCacheManager;
 
     private final BookRankCacheManager bookRankCacheManager;
+
+    private final BookInfoMapper bookInfoMapper;
 
     private final BookChapterMapper bookChapterMapper;
 
@@ -197,5 +201,82 @@ public class BookServiceImpl implements BookService {
         return RestResp.ok();
     }
 
+    @Override
+    public RestResp<Void> addVisitCount(Long bookId) {
+        bookInfoMapper.addVisitCount(bookId);
+        return RestResp.ok();
+    }
 
+    @Override
+    public RestResp<BookContentAboutRespDto> getBookContentAbout(Long chapterId) {
+        log.debug("userId:{}", UserHolder.getUserId());
+        // 查询章节信息
+        BookChapterRespDto bookChapter = bookChapterCacheManager.getChapter(chapterId);
+
+        // 查询章节内容
+        String content = bookContentCacheManager.getBookContent(chapterId);
+
+        // 查询小说信息
+        BookInfoRespDto bookInfo = bookInfoCacheManager.getBookInfo(bookChapter.getBookId());
+
+        // 组装数据并返回
+        return RestResp.ok(BookContentAboutRespDto.builder()
+                .bookInfo(bookInfo)
+                .chapterInfo(bookChapter)
+                .bookContent(content)
+                .build());
+    }
+
+    @Override
+    public RestResp<Long> getPreChapterId(Long chapterId) {
+        // 查询小说ID 和 章节号
+        BookChapterRespDto chapter = bookChapterCacheManager.getChapter(chapterId);
+        Long bookId = chapter.getBookId();
+        Integer chapterNum = chapter.getChapterNum();
+
+        // 查询上一章信息并返回章节ID
+        QueryWrapper<BookChapter> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq(DatabaseConsts.BookChapterTable.COLUMN_BOOK_ID, bookId)
+                .lt(DatabaseConsts.BookChapterTable.COLUMN_CHAPTER_NUM, chapterNum)
+                .orderByDesc(DatabaseConsts.BookChapterTable.COLUMN_CHAPTER_NUM)
+                .last(DatabaseConsts.SqlEnum.LIMIT_1.getSql());
+        return RestResp.ok(
+                Optional.ofNullable(bookChapterMapper.selectOne(queryWrapper))
+                        .map(BookChapter::getId)
+                        .orElse(null)
+        );
+    }
+
+    @Override
+    public RestResp<Long> getNextChapterId(Long chapterId) {
+        // 查询小说ID 和 章节号
+        BookChapterRespDto chapter = bookChapterCacheManager.getChapter(chapterId);
+        Long bookId = chapter.getBookId();
+        Integer chapterNum = chapter.getChapterNum();
+
+        // 查询下一章信息并返回章节ID
+        QueryWrapper<BookChapter> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq(DatabaseConsts.BookChapterTable.COLUMN_BOOK_ID, bookId)
+                .gt(DatabaseConsts.BookChapterTable.COLUMN_CHAPTER_NUM, chapterNum)
+                .orderByAsc(DatabaseConsts.BookChapterTable.COLUMN_CHAPTER_NUM)
+                .last(DatabaseConsts.SqlEnum.LIMIT_1.getSql());
+        return RestResp.ok(
+                Optional.ofNullable(bookChapterMapper.selectOne(queryWrapper))
+                        .map(BookChapter::getId)
+                        .orElse(null)
+        );
+    }
+
+    @Override
+    public RestResp<List<BookChapterRespDto>> listChapters(Long bookId) {
+        QueryWrapper<BookChapter> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq(DatabaseConsts.BookChapterTable.COLUMN_BOOK_ID, bookId)
+                .orderByAsc(DatabaseConsts.BookChapterTable.COLUMN_CHAPTER_NUM);
+        return RestResp.ok(bookChapterMapper.selectList(queryWrapper).stream()
+                .map(v -> BookChapterRespDto.builder()
+                        .id(v.getId())
+                        .chapterName(v.getChapterName())
+                        //.isVip(v.getIsVip())
+                        .build()).collect(Collectors.toList()));
+    }
 }

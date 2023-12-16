@@ -2,6 +2,7 @@ package com.tune.novel.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.tune.novel.model.entity.BookInfo;
+import org.apache.ibatis.annotations.Param;
 
 
 /**
@@ -11,5 +12,10 @@ import com.tune.novel.model.entity.BookInfo;
  * @since 2023-12-09 15:31:34
  */
 public interface BookInfoMapper extends BaseMapper<BookInfo> {
-
+    /**
+     * 增加小说点击量
+     *
+     * @param bookId 小说ID
+     */
+    void addVisitCount(@Param("bookId") Long bookId);
 }
