@@ -5,17 +5,17 @@ import com.tune.novel.core.common.resp.RestResp;
 import com.tune.novel.core.constant.SystemConfigConsts;
 import com.tune.novel.model.dto.req.UserLoginReqDto;
 import com.tune.novel.model.dto.req.UserRegisterReqDto;
+import com.tune.novel.model.dto.resp.UserCommentReqDto;
 import com.tune.novel.model.dto.resp.UserLoginRespDto;
 import com.tune.novel.model.dto.resp.UserRegisterRespDto;
+import com.tune.novel.servie.BookService;
 import com.tune.novel.servie.UserService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -34,6 +34,7 @@ public class UserController {
 
     private final UserService userService;
 
+    private final BookService bookService;
     /**
      * 用户注册接口
      */
@@ -50,5 +51,35 @@ public class UserController {
     @PostMapping("login")
     public RestResp<UserLoginRespDto> login(@Valid @RequestBody UserLoginReqDto dto) {
         return userService.login(dto);
+    }
+
+    // TODO 增删改评论接口修改固定userId为获取线程中的userId
+    /**
+     * 发表评论接口
+     */
+    @Operation(summary = "发表评论接口")
+    @PostMapping("comment")
+    public RestResp<Void> comment(@Valid @RequestBody UserCommentReqDto dto) {
+        dto.setUserId(1734411751878856705L);
+        return bookService.saveComment(dto);
+    }
+
+    /**
+     * 修改评论接口
+     */
+    @Operation(summary = "修改评论接口")
+    @PutMapping("comment/{id}")
+    public RestResp<Void> updateComment(@Parameter(description = "评论ID") @PathVariable Long id,
+                                        String content) {
+        return bookService.updateComment(1734411751878856705L, id, content);
+    }
+
+    /**
+     * 删除评论接口
+     */
+    @Operation(summary = "删除评论接口")
+    @DeleteMapping("comment/{id}")
+    public RestResp<Void> deleteComment(@Parameter(description = "评论ID") @PathVariable Long id) {
+        return bookService.deleteComment(1734411751878856705L, id);
     }
 }

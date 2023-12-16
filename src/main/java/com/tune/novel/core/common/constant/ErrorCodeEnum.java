@@ -73,8 +73,55 @@ public enum ErrorCodeEnum {
      * */
     USER_REQUEST_PARAM_ERROR("A0400","用户请求参数错误"),
 
-    // TODO 错误码常量添加
-    // ...省略若干用户端二级宏观错误码
+    /**
+     * 用户登录已过期
+     */
+    USER_LOGIN_EXPIRED("A0230", "用户登录已过期"),
+
+    /**
+     * 访问未授权
+     */
+    USER_UN_AUTH("A0301", "访问未授权"),
+
+    /**
+     * 用户请求服务异常
+     */
+    USER_REQ_EXCEPTION("A0500", "用户请求服务异常"),
+
+    /**
+     * 请求超出限制
+     */
+    USER_REQ_MANY("A0501", "请求超出限制"),
+
+    /**
+     * 用户评论异常
+     */
+    USER_COMMENT("A2000", "用户评论异常"),
+
+    /**
+     * 用户评论异常
+     */
+    USER_COMMENTED("A2001", "用户已发表评论"),
+
+    /**
+     * 作家发布异常
+     */
+    AUTHOR_PUBLISH("A3000", "作家发布异常"),
+
+    /**
+     * 小说名已存在
+     */
+    AUTHOR_BOOK_NAME_EXIST("A3001", "小说名已存在"),
+
+    /**
+     * 用户上传文件异常
+     */
+    USER_UPLOAD_FILE_ERROR("A0700", "用户上传文件异常"),
+
+    /**
+     * 用户上传文件类型不匹配
+     */
+    USER_UPLOAD_FILE_TYPE_NOT_MATCH("A0701", "用户上传文件类型不匹配"),
 
     /**
      * 一级宏观错误码，系统执行出错

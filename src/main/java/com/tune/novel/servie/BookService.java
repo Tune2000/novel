@@ -1,10 +1,7 @@
 package com.tune.novel.servie;
 
 import com.tune.novel.core.common.resp.RestResp;
-import com.tune.novel.model.dto.resp.BookChapterAboutRespDto;
-import com.tune.novel.model.dto.resp.BookCommentRespDto;
-import com.tune.novel.model.dto.resp.BookInfoRespDto;
-import com.tune.novel.model.dto.resp.BookRankRespDto;
+import com.tune.novel.model.dto.resp.*;
 
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
@@ -67,4 +64,31 @@ public interface BookService {
      * @return 小说更新排行列表
      */
     RestResp<List<BookRankRespDto>> listUpdateRankBooks();
+
+    /**
+     * 发表评论
+     *
+     * @param dto 评论相关 DTO
+     * @return void
+     */
+    RestResp<Void> saveComment(UserCommentReqDto dto);
+
+    /**
+     * 修改评论
+     *
+     * @param userId  用户ID
+     * @param id      评论ID
+     * @param content 修改后的评论内容
+     * @return void
+     */
+    RestResp<Void> updateComment(Long userId, Long id, String content);
+
+    /**
+     * 删除评论
+     *
+     * @param userId    评论用户ID
+     * @param commentId 评论ID
+     * @return void
+     */
+    RestResp<Void> deleteComment(Long userId, Long commentId);
 }
