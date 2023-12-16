@@ -1,5 +1,6 @@
 package com.tune.novel.controller.front;
 
+import com.tune.novel.core.auth.UserHolder;
 import com.tune.novel.core.common.constant.ApiRouterConsts;
 import com.tune.novel.core.common.resp.RestResp;
 import com.tune.novel.core.constant.SystemConfigConsts;
@@ -53,14 +54,15 @@ public class UserController {
         return userService.login(dto);
     }
 
-    // TODO 增删改评论接口修改固定userId为获取线程中的userId
+
     /**
      * 发表评论接口
      */
     @Operation(summary = "发表评论接口")
     @PostMapping("comment")
     public RestResp<Void> comment(@Valid @RequestBody UserCommentReqDto dto) {
-        dto.setUserId(1734411751878856705L);
+        System.out.println(UserHolder.getUserId());
+        dto.setUserId(UserHolder.getUserId());
         return bookService.saveComment(dto);
     }
 
@@ -71,7 +73,7 @@ public class UserController {
     @PutMapping("comment/{id}")
     public RestResp<Void> updateComment(@Parameter(description = "评论ID") @PathVariable Long id,
                                         String content) {
-        return bookService.updateComment(1734411751878856705L, id, content);
+        return bookService.updateComment(UserHolder.getUserId(), id, content);
     }
 
     /**
@@ -80,6 +82,6 @@ public class UserController {
     @Operation(summary = "删除评论接口")
     @DeleteMapping("comment/{id}")
     public RestResp<Void> deleteComment(@Parameter(description = "评论ID") @PathVariable Long id) {
-        return bookService.deleteComment(1734411751878856705L, id);
+        return bookService.deleteComment(UserHolder.getUserId(), id);
     }
 }
