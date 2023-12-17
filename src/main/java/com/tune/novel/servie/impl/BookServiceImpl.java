@@ -5,10 +5,7 @@ import com.tune.novel.core.auth.UserHolder;
 import com.tune.novel.core.common.constant.ErrorCodeEnum;
 import com.tune.novel.core.common.resp.RestResp;
 import com.tune.novel.core.constant.DatabaseConsts;
-import com.tune.novel.manager.cache.BookChapterCacheManager;
-import com.tune.novel.manager.cache.BookContentCacheManager;
-import com.tune.novel.manager.cache.BookInfoCacheManager;
-import com.tune.novel.manager.cache.BookRankCacheManager;
+import com.tune.novel.manager.cache.*;
 import com.tune.novel.manager.dao.UserDaoManager;
 import com.tune.novel.mapper.BookChapterMapper;
 import com.tune.novel.mapper.BookCommentMapper;
@@ -39,6 +36,8 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 @Slf4j
 public class BookServiceImpl implements BookService {
+
+    private final BookCategoryCacheManager bookCategoryCacheManager;
 
     private final BookInfoCacheManager bookInfoCacheManager;
 
@@ -278,5 +277,10 @@ public class BookServiceImpl implements BookService {
                         .chapterName(v.getChapterName())
                         //.isVip(v.getIsVip())
                         .build()).collect(Collectors.toList()));
+    }
+
+    @Override
+    public RestResp<List<BookCategoryRespDto>> listCategory(Integer workDirection) {
+        return RestResp.ok(bookCategoryCacheManager.listCategory(workDirection));
     }
 }

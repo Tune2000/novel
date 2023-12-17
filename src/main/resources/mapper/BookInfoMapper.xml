@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.tune.novel.mapper.BookInfoMapper">
 
-    <select id="searchBooks" resultType="com.tune.novel.mapper.BookInfoMapper">
+    <select id="searchBooks" resultType="com.tune.novel.model.entity.BookInfo">
         select
         id,category_id,category_name,book_name,author_id,author_name,word_count,last_chapter_name
         from book_info where word_count > 0

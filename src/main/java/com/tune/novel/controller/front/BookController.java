@@ -140,4 +140,14 @@ public class BookController {
             @Parameter(description = "小说ID") Long bookId) {
         return bookService.listChapters(bookId);
     }
+
+    /**
+     * 小说分类列表查询接口
+     */
+    @Operation(summary = "小说分类列表查询接口")
+    @GetMapping("category/list")
+    public RestResp<List<BookCategoryRespDto>> listCategory(
+            @Parameter(description = "作品方向", required = true) Integer workDirection) {
+        return bookService.listCategory(workDirection);
+    }
 }
