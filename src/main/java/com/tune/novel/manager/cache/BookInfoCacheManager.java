@@ -9,6 +9,7 @@ import com.tune.novel.model.dto.resp.BookInfoRespDto;
 import com.tune.novel.model.entity.BookChapter;
 import com.tune.novel.model.entity.BookInfo;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
@@ -70,6 +71,12 @@ public class BookInfoCacheManager {
                 .visitCount(bookInfo.getVisitCount())
                 .wordCount(bookInfo.getWordCount())
                 .build();
+    }
+
+    @CacheEvict(cacheManager = CacheConsts.CAFFEINE_CACHE_MANAGER,
+            value = CacheConsts.BOOK_INFO_CACHE_NAME)
+    public void evictBookInfoCache(Long bookId) {
+        // 调用此方法自动清除小说信息的缓存
     }
 
     /**

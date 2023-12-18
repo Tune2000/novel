@@ -1,5 +1,6 @@
 package com.tune.novel.model.entity;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 import lombok.AllArgsConstructor;
@@ -26,9 +27,9 @@ public class BookContent  {
     //小说章节内容
     private String content;
     
-    private Date createTime;
+    private LocalDateTime createTime;
     
-    private Date updateTime;
+    private LocalDateTime updateTime;
 
 
 

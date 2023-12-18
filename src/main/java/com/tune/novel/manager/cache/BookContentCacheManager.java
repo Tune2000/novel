@@ -6,6 +6,7 @@ import com.tune.novel.core.constant.DatabaseConsts;
 import com.tune.novel.mapper.BookContentMapper;
 import com.tune.novel.model.entity.BookContent;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
 
@@ -31,5 +32,11 @@ public class BookContentCacheManager {
                 .last(DatabaseConsts.SqlEnum.LIMIT_1.getSql());
         BookContent bookContent = bookContentMapper.selectOne(contentQueryWrapper);
         return bookContent.getContent();
+    }
+
+    @CacheEvict(cacheManager = CacheConsts.REDIS_CACHE_MANAGER,
+            value = CacheConsts.BOOK_CONTENT_CACHE_NAME)
+    public void evictBookContentCache(Long chapterId) {
+        // 调用此方法自动清除小说内容信息的缓存
     }
 }

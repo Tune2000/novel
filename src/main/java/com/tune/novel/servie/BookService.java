@@ -1,6 +1,11 @@
 package com.tune.novel.servie;
 
+import com.tune.novel.core.common.req.PageReqDto;
+import com.tune.novel.core.common.resp.PageRespDto;
 import com.tune.novel.core.common.resp.RestResp;
+import com.tune.novel.model.dto.req.BookAddReqDto;
+import com.tune.novel.model.dto.req.ChapterAddReqDto;
+import com.tune.novel.model.dto.req.ChapterUpdateReqDto;
 import com.tune.novel.model.dto.resp.*;
 
 import java.security.NoSuchAlgorithmException;
@@ -139,4 +144,62 @@ public interface BookService {
      * @return 分类列表
      */
     RestResp<List<BookCategoryRespDto>> listCategory(Integer workDirection);
+
+    /**
+     * 小说信息保存
+     *
+     * @param dto 小说信息
+     * @return void
+     */
+    RestResp<Void> saveBook(BookAddReqDto dto);
+
+    /**
+     * 查询作家发布小说列表
+     *
+     * @param dto 分页请求参数
+     * @return 小说分页列表数据
+     */
+    RestResp<PageRespDto<BookInfoRespDto>> listAuthorBooks(PageReqDto dto);
+
+    /**
+     * 小说章节保存
+     *
+     * @param dto 章节信息
+     * @return void
+     */
+    RestResp<Void> saveBookChapter(ChapterAddReqDto dto);
+
+    /**
+     * 小说章节删除
+     *
+     * @param chapterId 章节ID
+     * @return void
+     */
+    RestResp<Void> deleteBookChapter(Long chapterId);
+
+    /**
+     * 小说章节查询
+     *
+     * @param chapterId 章节ID
+     * @return 章节内容
+     */
+    RestResp<ChapterContentRespDto> getBookChapter(Long chapterId);
+
+    /**
+     * 小说章节更新
+     *
+     * @param chapterId 章节ID
+     * @param dto       更新内容
+     * @return void
+     */
+    RestResp<Void> updateBookChapter(Long chapterId, ChapterUpdateReqDto dto);
+
+    /**
+     * 查询小说发布章节列表
+     *
+     * @param bookId 小说ID
+     * @param dto    分页请求参数
+     * @return 章节分页列表数据
+     */
+    RestResp<PageRespDto<BookChapterRespDto>> listBookChapters(Long bookId, PageReqDto dto);
 }

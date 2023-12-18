@@ -1,6 +1,7 @@
 server:
   # 端口号
   port: 8888
+#---------------------自定义配置----------------------------
 # 项目配置
 novel:
   # JWT 密钥
@@ -12,7 +13,13 @@ novel:
     allow-origins:
       - http://localhost:1024
       - http://localhost:8080
+  file:
+    # 文件上传配置
+    upload:
+      # 上传路径
+      path: D:/ATempPic
 
+#---------------------数据库配置---------------------------
 spring:
     # 数据源配置
   datasource:
