@@ -13,7 +13,7 @@ import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-
+import org.springframework.beans.factory.annotation.Value;
 import javax.imageio.ImageIO;
 import java.io.File;
 import java.io.IOException;
@@ -35,6 +35,9 @@ public class ResourceServiceImpl implements ResourceService {
 
     private final VerifyCodeManager verifyCodeManager;
 
+    @Value("${novel.file.upload.path}")
+    private String fileUploadPath;
+
     @Override
     public RestResp<ImgVerifyCodeRespDto> getImgVerifyCode() throws IOException {
         String sessionId = IdWorker.get32UUID();
@@ -44,19 +47,49 @@ public class ResourceServiceImpl implements ResourceService {
                 .build());
     }
 
+    // 开发环境使用这个方法上传图片
+    //@SneakyThrows
+    //@Override
+    //public RestResp<String> uploadImage(MultipartFile file) {
+    //    LocalDateTime now = LocalDateTime.now();
+    //    String savePath =
+    //             SystemConfigConsts.IMAGE_UPLOAD_DIRECTORY
+    //                    + now.format(DateTimeFormatter.ofPattern("yyyy")) + File.separator
+    //                    + now.format(DateTimeFormatter.ofPattern("MM")) + File.separator
+    //                    + now.format(DateTimeFormatter.ofPattern("dd"));
+    //    String oriName = file.getOriginalFilename();
+    //    assert oriName != null;
+    //    String saveFileName = IdWorker.get32UUID() + oriName.substring(oriName.lastIndexOf("."));
+    //    File saveFile = new File(fileUploadPath + savePath, saveFileName);
+    //    if (!saveFile.getParentFile().exists()) {
+    //        boolean isSuccess = saveFile.getParentFile().mkdirs();
+    //        if (!isSuccess) {
+    //            throw new BusinessException(ErrorCodeEnum.USER_UPLOAD_FILE_ERROR);
+    //        }
+    //    }
+    //    file.transferTo(saveFile);
+    //    if (Objects.isNull(ImageIO.read(saveFile))) {
+    //        // 上传的文件不是图片
+    //        Files.delete(saveFile.toPath());
+    //        throw new BusinessException(ErrorCodeEnum.USER_UPLOAD_FILE_TYPE_NOT_MATCH);
+    //    }
+    //    return RestResp.ok(savePath + File.separator + saveFileName);
+    //}
+
+    //TODO 生产环境使用这个方法上传图片
     @SneakyThrows
     @Override
     public RestResp<String> uploadImage(MultipartFile file) {
         LocalDateTime now = LocalDateTime.now();
         String savePath =
-                SystemConfigConsts.IMAGE_UPLOAD_DIRECTORY
-                        + now.format(DateTimeFormatter.ofPattern("yyyy")) + File.separator
+                //SystemConfigConsts.IMAGE_UPLOAD_DIRECTORY +
+                        now.format(DateTimeFormatter.ofPattern("yyyy")) + File.separator
                         + now.format(DateTimeFormatter.ofPattern("MM")) + File.separator
                         + now.format(DateTimeFormatter.ofPattern("dd"));
         String oriName = file.getOriginalFilename();
         assert oriName != null;
         String saveFileName = IdWorker.get32UUID() + oriName.substring(oriName.lastIndexOf("."));
-        File saveFile = new File("D:/ATempPic/upload" + savePath, saveFileName);
+        File saveFile = new File(fileUploadPath + savePath, saveFileName);
         if (!saveFile.getParentFile().exists()) {
             boolean isSuccess = saveFile.getParentFile().mkdirs();
             if (!isSuccess) {
